@@ -20,7 +20,8 @@ screen.onkey(fun=snake.turn_left, key="Left")
 screen.onkey(fun=snake.turn_up, key="Up")
 screen.onkey(fun=snake.turn_down, key="Down")
 
-while not snake.is_dead():
+game_is_on = True
+while game_is_on:
     screen.update()
     time.sleep(0.1)
     snake.move()
@@ -28,6 +29,8 @@ while not snake.is_dead():
         food.refresh()
         snake.add_tail()
         scoreboard.inc_score()
-scoreboard.game_over()
+    if snake.is_dead():
+        scoreboard.game_over()
+        snake.reset()
 
 screen.exitonclick()
